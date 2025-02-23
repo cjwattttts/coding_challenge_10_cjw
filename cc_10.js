@@ -1,6 +1,6 @@
 //TASK 1
 class Product {
-    construction( name, id, price, stock) {
+    constructor( name, id, price, stock) {
         this.name = name; // sets prodyct name
         this.id = id; // sets product ID
         this.price = price; // sets product price
@@ -52,6 +52,7 @@ console.log(prod1.getDetails());
 class Inventory {
     constructor() {
         this.products = []; // array set to store products
+        this.orders = []; // array to store orders
     }
 
     addProduct(product) { // adds new product to inventory
@@ -71,16 +72,16 @@ class Inventory {
             console.log(`Order ${orderId} succesfully placed.`);
         } else {
             console.log(`Not enough available stock for ${product.name}.`);
-        
+        }
     }
-}
-
-listOrders() {
+    
+    listOrders() {
     this.orders.forEach(order => {
         console.log(order.getOrderDetails());
-    });
+        });
     }
-restockProduct(productId, quantity) {
+    
+    restockProduct(productId, quantity) {
     const product = this.products.find(p => p.id === productId);
     if (product) {
         product.stock += quantity;
@@ -88,7 +89,7 @@ restockProduct(productId, quantity) {
     } else {
         console.log("No product found.");
     }
-}
+    }
 }
 
 // Test Cases TASK 3
