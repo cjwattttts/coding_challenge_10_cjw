@@ -48,7 +48,7 @@ console.log(order1.getOrderDetails());
 console.log(prod1.getDetails()); 
 // Expected output: "Product: Laptop, ID: 101, Price: $1200, Stock: 5" (Stock reduced)
 
-//TASK 3
+//TASK 3, 4, 5
 class Inventory {
     constructor() {
         this.products = []; // array set to store products
@@ -80,18 +80,31 @@ listOrders() {
         console.log(order.getOrderDetails());
     });
     }
+restockProduct(productId, quantity) {
+    const product = this.products.find(p => p.id === productId);
+    if (product) {
+        product.stock += quantity;
+        console.log(`${product.name} is restocked. The new stock: ${product.stock}`);
+    } else {
+        console.log("No product found.");
+    }
+}
 }
 
-//Test Cases TASK 3
+// Test Cases TASK 3
 const inventory = new Inventory();
 inventory.addProduct(prod1);
 inventory.listProducts();
 // Expected output: "Product: Laptop, ID: 101, Price: $1200, Stock: 5"
 
-//Test Cases TASK 4
+// Test Cases TASK 4
 inventory.placeOrder(601, prod1, 2);
 inventory.listOrders();
 // Expected output: "Order ID: 601, Product: Laptop, Quantity: 2, Total Price: $2400"
 console.log(prod1.getDetails());
 // Expected output: "Product: Laptop, ID: 101, Price: $1200, Stock: 3"
 
+// Test Cases for TASK 5
+inventory.restockProduct(101, 5);
+console.log(prod1.getDetails()); 
+// Expected output: "Product: Laptop, ID: 101, Price: $1200, Stock: 8"
