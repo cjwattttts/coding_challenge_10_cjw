@@ -51,7 +51,7 @@ console.log(prod1.getDetails());
 //TASK 3
 class Inventory {
     constructor() {
-        this.product = []; // array set to store products
+        this.products = []; // array set to store products
     }
 
     addProduct(product) { // adds new product to inventory
@@ -63,10 +63,35 @@ class Inventory {
             console.log(product.getDetails());
         });
     }
+
+    placeOrder(orderId, product, quantity) {
+        if (product.stock >= quantity) {
+            const newOrder = new Order(orderId, product, quantity);
+            this.orders.push(newOrder);
+            console.log(`Order ${orderId} succesfully placed.`);
+        } else {
+            console.log(`Not enough available stock for ${product.name}.`);
+        
+    }
 }
 
-//Test Cases
+listOrders() {
+    this.orders.forEach(order => {
+        console.log(order.getOrderDetails());
+    });
+    }
+}
+
+//Test Cases TASK 3
 const inventory = new Inventory();
 inventory.addProduct(prod1);
 inventory.listProducts();
 // Expected output: "Product: Laptop, ID: 101, Price: $1200, Stock: 5"
+
+//Test Cases TASK 4
+inventory.placeOrder(601, prod1, 2);
+inventory.listOrders();
+// Expected output: "Order ID: 601, Product: Laptop, Quantity: 2, Total Price: $2400"
+console.log(prod1.getDetails());
+// Expected output: "Product: Laptop, ID: 101, Price: $1200, Stock: 3"
+
